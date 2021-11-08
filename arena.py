@@ -3,24 +3,19 @@ from weapon import Weapon
 from armor import Armor
 from hero import Hero
 from team import Team
+
 import sys
 import os
 
-def require_int(message):
+def input_int(message):
     while True:
         try:
             return int(input(message))
         except ValueError:
-            print("Invalid number!")
+            print("Invalid Input!")
             continue
 
-def clear():
-    if os.name == "nt":
-        os.system("cls")
-    else:
-        os.system("clear")
-
-def calculate_kd(team):
+def calc_kd(team):
     team_kills = 0
     team_deaths = 0
 
@@ -31,6 +26,11 @@ def calculate_kd(team):
         team_deaths = 1
     return team_kills / team_deaths
 
+def clear():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 class Arena:
     def __init__(self):
@@ -39,21 +39,21 @@ class Arena:
 
     def create_ability(self):
         name = input("What is the ability name?\n")
-        max_damage = require_int("What is the max damage of the ability?\n")
+        max_damage = input_int("What is the max damage of the ability?\n")
         clear()
 
         return Ability(name, max_damage)
 
     def create_weapon(self):
         weapon_name = input("What is the weapon name?\n")
-        weapon_damage = require_int("What is the weapon damage?\n")
+        weapon_damage = input_int("What is the weapon damage?\n")
         clear()
 
         return Weapon(weapon_name, weapon_damage)
 
     def create_armor(self):
         name = input("What is the armor name?\n")
-        max_block = require_int("What is the max block for the armor?\n")
+        max_block = input_int("What is the max block for the armor?\n")
         clear()
 
         return Armor(name, max_block)
@@ -65,8 +65,8 @@ class Arena:
         add_item = None
         while add_item != 4:
             clear()
-            add_item = require_int(
-                "#1 Add Ability\n#2 Add Weapons\n#3 Add Armor\n#4 Added Items\n\nYour choice: ")
+            add_item = input_int(
+                "[1] Add ability\n[2] Add weapon\n[3] Add armor\n[4] Done adding items\n\nYour choice: ")
             clear()
             if add_item == 1:
                 ability = self.create_ability()
@@ -85,7 +85,7 @@ class Arena:
 
         self.team_one = Team(team_name)
 
-        number_of_team_members = require_int("How many members would you like on Team One?\n")
+        number_of_team_members = input_int("How many members would you like on Team One?\n")
         clear()
 
         for i in range(number_of_team_members):
@@ -97,7 +97,7 @@ class Arena:
         clear()
 
         self.team_two = Team(team_name)
-        number_of_team_members = require_int("How many members would you like on Team Two?\n")
+        number_of_team_members = input_int("How many members would you like on Team Two?\n")
         clear()
 
         for i in range(number_of_team_members):
@@ -116,10 +116,10 @@ class Arena:
         self.team_two.stats()
         print("\n")
 
-        team_one_kd = calculate_kd(self.team_one)
+        team_one_kd = calc_kd(self.team_one)
         print(self.team_one.name + " average K/D was: " + str(team_one_kd))
 
-        team_two_kd = calculate_kd(self.team_two)
+        team_two_kd = calc_kd(self.team_two)
         print(self.team_two.name + " average K/D was: " + str(team_two_kd))
 
         for hero in self.team_one.heroes:
@@ -129,7 +129,6 @@ class Arena:
         for hero in self.team_two.heroes:
             if hero.deaths == 0:
                 print("survived from " + self.team_two.name + ": " + hero.name)
-
 
 def main():
     arena = Arena()
@@ -147,7 +146,6 @@ def main():
             break
         arena.team_one.revive_heroes()
         arena.team_two.revive_heroes()
-
 
 if __name__ == "__main__":
     try:
