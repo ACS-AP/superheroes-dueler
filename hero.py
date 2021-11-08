@@ -1,6 +1,5 @@
 from weapon import Weapon
 
-
 class Hero:
     def __init__(self, name, starting_health=100):
         self.name = name
@@ -45,8 +44,6 @@ class Hero:
     def fight(self, opponent):
         if (len(self.abilities) == 0) and (len(opponent.abilities) == 0):
             print("It's a draw!")
-
-            # Prevent endless loop by setting each health to 0
             opponent.current_health = 0
             self.current_health = 0
         else:
@@ -82,7 +79,6 @@ class Hero:
 
     def add_death(self, num_deaths):
         self.deaths += num_deaths
-
 
 if __name__ == "__main__":
     hero = Hero("Wonder Woman")

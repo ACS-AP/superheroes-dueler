@@ -14,7 +14,6 @@ def require_int(message):
             print("Invalid number!")
             continue
 
-
 def clear():
     if os.name == "nt":
         os.system("cls")
@@ -67,7 +66,7 @@ class Arena:
         while add_item != 4:
             clear()
             add_item = require_int(
-                "[1] Add ability\n[2] Add weapon\n[3] Add armor\n[4] Done adding items\n\nYour choice: ")
+                "#1 Add Ability\n#2 Add Weapons\n#3 Add Armor\n#4 Added Items\n\nYour choice: ")
             clear()
             if add_item == 1:
                 ability = self.create_ability()
