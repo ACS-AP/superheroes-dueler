@@ -251,7 +251,7 @@ def test_hero_defense():
     jodie = Hero("Jodie Foster")
     gauntlets = Armor("Gauntlets", 30)
     jodie.add_armor(gauntlets)
-    defense = jodie.defend(20)
+    defense = jodie.defend()
     assert defense >= 0 and defense <= 30
 
 
