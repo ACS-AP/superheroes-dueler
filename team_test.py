@@ -254,7 +254,6 @@ def test_hero_defense():
     defense = jodie.defend()
     assert defense >= 0 and defense <= 30
 
-
 def test_hero_defense_mean_value():
     athena = Hero("Athena")
     strength = random.randint(400, 30000)
